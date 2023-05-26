@@ -1,3 +1,8 @@
+= MediaWiki 1.35 PoeWiki =
+
+PoeWiki added a couple of amendments to support unique functionality of this
+wiki.
+
 = MediaWiki 1.35 =
 
 MediaWiki 1.35 should mostly work on PHP 8.0/8.1, however it is not
