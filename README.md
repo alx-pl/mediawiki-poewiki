@@ -1,4 +1,7 @@
-# MediaWiki
+# MediaWiki - PoeWiki
+
+This is the version of the MediaWiki software with amendments developed to support
+operation of PoeWiki, Polish poetry related wiki.
 
 MediaWiki is a free and open-source wiki software package written in PHP. It
 serves as the platform for Wikipedia and the other Wikimedia projects, used
