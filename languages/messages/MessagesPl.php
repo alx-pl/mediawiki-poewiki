@@ -72,30 +72,30 @@
 $namespaceNames = [
 	NS_MEDIA            => 'Media',
 	NS_SPECIAL          => 'Specjalna',
-	NS_TALK             => 'Dyskusja',
-	NS_USER             => 'Użytkownik',
-	NS_USER_TALK        => 'Dyskusja_użytkownika',
-	NS_PROJECT_TALK     => 'Dyskusja_$1',
+	NS_TALK             => 'Nieużywana_rozmowa_artykułu',
+	NS_USER             => 'Strona_osobista',
+	NS_USER_TALK        => 'Rozmowa',
+	NS_PROJECT_TALK     => 'Nieużywana_rozmowa_$1',
 	NS_FILE             => 'Plik',
-	NS_FILE_TALK        => 'Dyskusja_pliku',
+	NS_FILE_TALK        => 'Nieużywana_rozmowa_pliku',
 	NS_MEDIAWIKI        => 'MediaWiki',
-	NS_MEDIAWIKI_TALK   => 'Dyskusja_MediaWiki',
+	NS_MEDIAWIKI_TALK   => 'Nieużywana_rozmowa_MediaWiki',
 	NS_TEMPLATE         => 'Szablon',
-	NS_TEMPLATE_TALK    => 'Dyskusja_szablonu',
+	NS_TEMPLATE_TALK    => 'Nieużywana_rozmowa_szablonu',
 	NS_HELP             => 'Pomoc',
-	NS_HELP_TALK        => 'Dyskusja_pomocy',
+	NS_HELP_TALK        => 'Nieużywana_rozmowa_pomocy',
 	NS_CATEGORY         => 'Kategoria',
-	NS_CATEGORY_TALK    => 'Dyskusja_kategorii',
+	NS_CATEGORY_TALK    => 'Nieużywana_rozmowa_kategorii',
 ];
 
 $namespaceAliases = [
 	'Grafika' => NS_FILE,
-	'Dyskusja_grafiki' => NS_FILE_TALK,
+	'Nieużywana_rozmowa_grafiki' => NS_FILE_TALK,
 ];
 
 $namespaceGenderAliases = [
-	NS_USER => [ 'male' => 'Użytkownik', 'female' => 'Użytkowniczka' ],
-	NS_USER_TALK => [ 'male' => 'Dyskusja_użytkownika', 'female' => 'Dyskusja_użytkowniczki' ],
+	NS_USER => [ 'male' => 'Strona_osobista', 'female' => 'Strona_osobista' ],
+	NS_USER_TALK => [ 'male' => 'Rozmowa', 'female' => 'Rozmowa' ],
 ];
 
 $dateFormats = [
