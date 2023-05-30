@@ -30,6 +30,10 @@ class NamespaceInputWidget extends \OOUI\DropdownInputWidget {
 		$this->includeAllValue = $config['includeAllValue'] ?? null;
 		$this->exclude = $config['exclude'] ?? [];
 
+                //PoeWiki excluded namespaces
+                global $wgRemovedNamespaces;
+                $this->exclude = array_merge($this->exclude, $wgRemovedNamespaces);
+
 		// Initialization
 		$this->addClasses( [ 'mw-widget-namespaceInputWidget' ] );
 	}
