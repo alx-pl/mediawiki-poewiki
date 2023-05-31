@@ -69,7 +69,9 @@ class SearchEngineConfig {
 	public function searchableNamespaces() {
 		$arr = [];
 		foreach ( $this->language->getNamespaces() as $ns => $name ) {
-			if ( $ns >= NS_MAIN ) {
+			if ( $ns >= NS_MAIN &&
+			    //PoeWiki: take into account removed namespaces
+                            !in_array($ns, $wgRemovedNamespaces, true)) {
 				$arr[$ns] = $name;
 			}
 		}
