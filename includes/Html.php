@@ -896,6 +896,13 @@ class Html {
 	) {
 		ksort( $selectAttribs );
 
+		//PoeWiki - remove unwanted namespaces on pages with namespace Selectors
+		global $wgRemovedNamespaces;
+                if ( !isset( $params['exclude'] ) || !is_array( $params['exclude'] ) ) {
+                        $params['exclude'] = [];
+                }
+                $params['exclude'] = array_merge($wgRemovedNamespaces, $params['exclude']);
+
 		// Is a namespace selected?
 		if ( isset( $params['selected'] ) ) {
 			// If string only contains digits, convert to clean int. Selected could also
