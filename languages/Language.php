@@ -583,6 +583,8 @@ class Language {
 	public function getNamespaces() {
 		if ( $this->namespaceNames === null ) {
 			global $wgMetaNamespace, $wgMetaNamespaceTalk, $wgExtraNamespaces;
+			// PoeWiki remove unwanted namespaces
+			global $wgRemovedNamespaces;
 
 			$validNamespaces = MediaWikiServices::getInstance()->getNamespaceInfo()->
 				getCanonicalNamespaces();
@@ -603,6 +605,9 @@ class Language {
 			# Sometimes a language will be localised but not actually exist on this wiki.
 			foreach ( $this->namespaceNames as $key => $text ) {
 				if ( !isset( $validNamespaces[$key] ) ) {
+					unset( $this->namespaceNames[$key] );
+				}
+				if ( in_array( $key, $wgRemovedNamespaces) && isset( $this->namespaceNames[$key] ) ) {
 					unset( $this->namespaceNames[$key] );
 				}
 			}
