@@ -67,6 +67,7 @@ class SearchEngineConfig {
 	 * @phan-return array<int,string>
 	 */
 	public function searchableNamespaces() {
+		global $wgRemovedNamespaces;
 		$arr = [];
 		foreach ( $this->language->getNamespaces() as $ns => $name ) {
 			if ( $ns >= NS_MAIN &&
