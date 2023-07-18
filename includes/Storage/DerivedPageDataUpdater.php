@@ -1422,6 +1422,15 @@ class DerivedPageDataUpdater implements IDBAccessObject, LoggerAwareInterface {
 		return $allUpdates;
 	}
 
+	public function getTitleUser($shortTitle) {
+		$res = explode(":", $shortTitle);
+		if (count($res) == 1) {
+			$res = explode("/", $res[0]);
+		} else {
+			$res = explode("/", $res[1]);
+		}
+		return $res[0];
+	}
 	/**
 	 * Do standard updates after page edit, purge, or import.
 	 * Update links tables, site stats, search index, title cache, message cache, etc.
@@ -1542,14 +1551,22 @@ class DerivedPageDataUpdater implements IDBAccessObject, LoggerAwareInterface {
 		// If this is another user's talk page, update newtalk.
 		// Don't do this if $options['changed'] = false (null-edits) nor if
 		// it's a minor edit and the user making the edit doesn't generate notifications for those.
+		$titleUser = $this->getTitleUser($shortTitle);
 		if ( $this->options['changed']
-			&& $title->getNamespace() == NS_USER_TALK
-			&& $shortTitle != $legacyUser->getTitleKey()
+			&& ($title->getNamespace() == NS_USER_TALK || $title->getNamespace() == NS_USER)
+			&& $titleUser != $legacyUser->getTitleKey()
 			&& !( $this->revision->isMinor() && MediaWikiServices::getInstance()
 					->getPermissionManager()
 					->userHasRight( $legacyUser, 'nominornewtalk' ) )
-		) {
-			$recipient = User::newFromName( $shortTitle, false );
+		) {     
+			if ( str_contains($shortTitle, '/' ) 
+			) {
+				$pos = strpos($shortTitle, '/');
+				$rname = substr($shortTitle, 0, $pos);
+			} else {
+				$rname = $shortTitle;
+			}
+			$recipient = User::newFromName( $rname, false );
 			if ( !$recipient ) {
 				wfDebug( __METHOD__ . ": invalid username" );
 			} else {

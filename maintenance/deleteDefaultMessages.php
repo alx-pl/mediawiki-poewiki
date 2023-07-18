@@ -97,6 +97,13 @@ class DeleteDefaultMessages extends Maintenance {
 			$title = Title::makeTitle( $row->page_namespace, $row->page_title );
 			$page = WikiPage::factory( $title );
 			// FIXME: Deletion failures should be reported, not silently ignored.
+			$content = $page->getContent();
+			                        print("----------------------------------------\n");
+                        print("Title:" . $title->getText() . "\n");
+                        print("--Content-start------------------------------------\n");
+                        print($content->getText());
+                        print("\n");
+                        print("--Content-end------------------------------------\n");
 			$page->doDeleteArticleReal( 'No longer required', $user );
 		}
 
