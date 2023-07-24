@@ -291,7 +291,7 @@ class SpecialVersion extends SpecialPage {
 			) .
 			Xml::openElement( 'table', [ 'class' => 'wikitable plainlinks', 'id' => 'sv-software' ] ) .
 			"<tr>
-				<th>" . wfMessage( 'version-software-product' )->text() . "</th>
+				<th>" . wfMessage( 'version-software-product' )->text() .  "</th>
 				<th>" . wfMessage( 'version-software-version' )->text() . "</th>
 			</tr>\n";
 
@@ -346,9 +346,8 @@ class SpecialVersion extends SpecialPage {
 		if ( $gitVersion ) {
 			$v = $gitVersion;
 		} else {
-			$v = MW_VERSION; // fallback
+		        $v = self::getMWVersionLinked();
 		}
-
 		return $v;
 	}
 
@@ -360,7 +359,7 @@ class SpecialVersion extends SpecialPage {
 		if ( Hooks::runner()->onSpecialVersionVersionUrl( MW_VERSION, $versionUrl ) ) {
 			$versionParts = [];
 			preg_match( "/^(\d+\.\d+)/", MW_VERSION, $versionParts );
-			$versionUrl = "https://www.mediawiki.org/wiki/MediaWiki_{$versionParts[1]}";
+			$versionUrl = "https://github.com/alx-pl/mediawiki-poewiki";
 		}
 
 		return '[' . $versionUrl . ' ' . MW_VERSION . ']';
