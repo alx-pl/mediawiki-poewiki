@@ -73,7 +73,7 @@ $namespaceNames = [
 	NS_MEDIA            => 'Media',
 	NS_SPECIAL          => 'Specjalna',
 	NS_TALK             => 'Nieużywana_rozmowa_artykułu',
-	NS_USER             => 'Strona_osobista',
+	NS_USER             => 'WStrona_osobista',
 	NS_USER_TALK        => 'Rozmowa',
 	NS_PROJECT_TALK     => 'Nieużywana_rozmowa_$1',
 	NS_FILE             => 'Plik',
@@ -96,6 +96,15 @@ $namespaceAliases = [
 $namespaceGenderAliases = [
 	NS_USER => [ 'male' => 'Strona_osobista', 'female' => 'Strona_osobista' ],
 	NS_USER_TALK => [ 'male' => 'Rozmowa', 'female' => 'Rozmowa' ],
+];
+
+$namespaceNumberAliases = [
+	NS_SPECIAL => [ 1 => 'Specjalna', 2 => 'Specjalne', 5 => 'Specjalnych' ],
+	NS_USER => [ 1 => 'Strona_osobista', 2 => 'Strony_osobiste', 5 => 'Stron_osobistych' ],
+	NS_USER_TALK => [ 1 => 'Rozmowa', 2 => 'Rozmowy', 5 => 'Rozmów'],
+	NS_FILE => [ 1 => 'Plik', 2 => 'Pliki', 5 => 'Plików' ],
+	NS_TEMPLATE => [ 1 => 'Szablon', 2 => 'Szablony', 5 => 'Szablonów' ],
+	NS_CATEGORY => [ 1 => 'Kategoria', 2 => 'Kategorie', 5 => 'Kategorii'],
 ];
 
 $dateFormats = [

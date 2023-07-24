@@ -652,7 +652,7 @@ class SpecialEditWatchlist extends UnlistedSpecialPage {
 
 				$nsText = ( $ns == NS_MAIN )
 					? $this->msg( 'blanknamespace' )->escaped()
-					: htmlspecialchars( $contLang->getFormattedNsText( $ns ) );
+					: htmlspecialchars( $contLang->getFormattedNumberNsText( $ns, 2 ) );
 				$this->toc .= Linker::tocLine( "editwatchlist-{$data['section']}", $nsText,
 					$this->getLanguage()->formatNum( ++$tocLength ), 1 ) . Linker::tocLineEnd();
 			}
@@ -671,7 +671,7 @@ class SpecialEditWatchlist extends UnlistedSpecialPage {
 		# 'accesskey-watchlistedit-normal-submit', 'tooltip-watchlistedit-normal-submit'
 		$form->setSubmitTooltip( 'watchlistedit-normal-submit' );
 		$form->setWrapperLegendMsg( 'watchlistedit-normal-legend' );
-		$form->addHeaderText( $this->msg( 'watchlistedit-normal-explain' )->parse() );
+		//$form->addHeaderText( $this->msg( 'watchlistedit-normal-explain' )->parse() );
 		$form->setSubmitCallback( [ $this, 'submitNormal' ] );
 
 		return $form;
@@ -690,10 +690,11 @@ class SpecialEditWatchlist extends UnlistedSpecialPage {
 		$link = $linkRenderer->makeLink( $title );
 
 		$tools = [];
-		$tools['talk'] = $linkRenderer->makeLink(
-			$title->getTalkPage(),
-			$this->msg( 'talkpagelinktext' )->text()
-		);
+		// No talk in the watched pages edit
+		//$tools['talk'] = $linkRenderer->makeLink(
+		//	$title->getTalkPage(),
+		//	$this->msg( 'talkpagelinktext' )->text()
+		//);
 
 		if ( $title->exists() ) {
 			$tools['history'] = $linkRenderer->makeKnownLink(

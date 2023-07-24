@@ -4325,6 +4325,7 @@ $wgExtraNamespaces = [];
  * @since 1.18
  */
 $wgExtraGenderNamespaces = [];
+$wgExtraNumberNamespaces = [];
 
 /**
  * Define extra namespace aliases.

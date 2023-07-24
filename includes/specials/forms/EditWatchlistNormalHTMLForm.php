@@ -27,7 +27,7 @@ class EditWatchlistNormalHTMLForm extends OOUIHTMLForm {
 
 		return $namespace == NS_MAIN
 			? $this->msg( 'blanknamespace' )->text()
-			: $this->getContext()->getLanguage()->getFormattedNsText( $namespace );
+			: $this->getContext()->getLanguage()->getFormattedNumberNsText( $namespace, 2 );
 	}
 
 	public function displaySection(

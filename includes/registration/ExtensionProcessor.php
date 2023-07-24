@@ -81,6 +81,7 @@ class ExtensionProcessor implements Processor {
 		'wgAuthManagerAutoConfig' => 'array_plus_2d',
 		'wgCapitalLinkOverrides' => 'array_plus',
 		'wgExtraGenderNamespaces' => 'array_plus',
+		'wgExtraNumberNamespaces' => 'array_plus',
 		'wgGrantPermissions' => 'array_plus_2d',
 		'wgGroupPermissions' => 'array_plus_2d',
 		'wgHooks' => 'array_merge_recursive',
@@ -525,6 +526,9 @@ class ExtensionProcessor implements Processor {
 				}
 				if ( isset( $ns['gender'] ) ) {
 					$this->globals['wgExtraGenderNamespaces'][$id] = $ns['gender'];
+				}
+				if ( isset( $ns['number'] ) ) {
+					$this->globals['wgExtraNumberNamespaces'][$id] = $ns['number'];
 				}
 				if ( isset( $ns['subpages'] ) && $ns['subpages'] ) {
 					$this->globals['wgNamespacesWithSubpages'][$id] = true;

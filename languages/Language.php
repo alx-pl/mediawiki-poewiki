@@ -689,6 +689,19 @@ class Language {
 	}
 
 	/**
+	 * A convenience function that returns the same thing as
+	 * getNumberNsText() except with '_' changed to ' ', useful for
+	 * producing output.
+	 *
+	 * @param int $index The array key of the namespace to return
+	 * @return string Namespace name without underscores (empty string if namespace does not exist)
+	 */
+	public function getFormattedNumberNsText( $index, $number ) {
+		$ns = $this->getNumberNsText( $index, $number );
+		return strtr( $ns, '_', ' ' );
+	}
+
+	/**
 	 * Returns gender-dependent namespace alias if available.
 	 * See https://www.mediawiki.org/wiki/Manual:$wgExtraGenderNamespaces
 	 * @param int $index Namespace index
@@ -703,6 +716,22 @@ class Language {
 			(array)$this->localisationCache->getItem( $this->mCode, 'namespaceGenderAliases' );
 
 		return $ns[$index][$gender] ?? $this->getNsText( $index );
+	}
+
+	/**
+	 * Returns number-dependent namespace alias if available.
+	 * @param int $index Namespace index
+	 * @param string $number key (0, 1, 2... )
+	 * @return string
+	 * @since 1.18
+	 */
+	public function getNumberNsText( $index, $number ) {
+		global $wgExtraNumberNamespaces;
+
+		$ns = $wgExtraNumberNamespaces +
+			(array)$this->localisationCache->getItem( $this->mCode, 'namespaceNumberAliases' );
+
+		return $ns[$index][$number] ?? $this->getNsText( $index ) ;
 	}
 
 	/**

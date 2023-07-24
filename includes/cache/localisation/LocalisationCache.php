@@ -129,7 +129,8 @@ class LocalisationCache {
 		'namespaceAliases', 'dateFormats', 'datePreferences',
 		'datePreferenceMigrationMap', 'defaultDateFormat',
 		'specialPageAliases', 'imageFiles', 'preloadedMessages',
-		'namespaceGenderAliases', 'digitGroupingPattern', 'pluralRules',
+		'namespaceGenderAliases', 'namespaceNumberAliases', 
+		'digitGroupingPattern', 'pluralRules',
 		'pluralRuleTypes', 'compiledPluralRules',
 	];
 
@@ -572,7 +573,6 @@ class LocalisationCache {
 		} else {
 			throw new MWException( __METHOD__ . ": Invalid file type: $_fileType" );
 		}
-
 		return $data;
 	}
 
