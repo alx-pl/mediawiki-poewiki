@@ -7244,7 +7244,9 @@ $wgGitRepositoryViewers = [
  * seconds will go.
  * Default: 90 days = about three months
  */
-$wgRCMaxAge = 90 * 24 * 3600;
+$now = time(); // or your date as well
+$start_date = strtotime("2005-01-01");
+$wgRCMaxAge = round(($now - $start_date)/ (60 * 60 * 24))*60*60*24;
 
 /**
  * Page watchers inactive for more than this many seconds are considered inactive.

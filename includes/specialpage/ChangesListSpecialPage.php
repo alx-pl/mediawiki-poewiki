@@ -824,7 +824,6 @@ abstract class ChangesListSpecialPage extends SpecialPage {
 			$out->addJsConfigVars( 'wgStructuredChangeFilters', $jsData['groups'] );
 			$out->addJsConfigVars( 'wgStructuredChangeFiltersMessages', $messages );
 			$out->addJsConfigVars( 'wgStructuredChangeFiltersCollapsedState', $collapsed );
-
 			$out->addJsConfigVars(
 				'StructuredChangeFiltersDisplayConfig',
 				[
@@ -1231,8 +1230,8 @@ abstract class ChangesListSpecialPage extends SpecialPage {
 		$opts->add( 'urlversion', 1 );
 		$opts->add( 'tagfilter', '' );
 
-		$opts->add( 'days', $this->getDefaultDays(), FormOptions::FLOAT );
-		$opts->add( 'limit', $this->getDefaultLimit(), FormOptions::INT );
+		$opts->add( 'days', $this->getDefaultDays(), FormOptions::STRING );
+		$opts->add( 'limit', $this->getDefaultLimit(), FormOptions::STRING );
 
 		$opts->add( 'from', '' );
 
@@ -1369,6 +1368,11 @@ abstract class ChangesListSpecialPage extends SpecialPage {
 	 * @param FormOptions $opts
 	 */
 	public function validateOptions( FormOptions $opts ) {
+
+		global $wgRCMaxAge;
+
+		$mage = $wgRCMaxAge/(60*60*24) ;
+
 		$isContradictory = $this->fixContradictoryOptions( $opts );
 		$isReplaced = $this->replaceOldOptions( $opts );
 
@@ -1377,6 +1381,24 @@ abstract class ChangesListSpecialPage extends SpecialPage {
 			$this->getOutput()->redirect( $this->getPageTitle()->getCanonicalURL( $query ) );
 		}
 
+		$lim = $opts->getValue('limit');
+		if (gettype($lim) === string) {
+			$opts->add( 'limit', 0, $opts::INT);
+			if (strcmp($lim,"inf") === 0) {
+				$opts->setValue('limit', 4444);
+			} else {
+				$opts->setValue('limit', intval($lim));
+			}
+		}
+		$dys = $opts->getValue('days');
+		if (gettype($dys) === string) {
+			$opts->add( 'days', 0, $opts::FLOAT);
+			if (strcmp($dys,"-1") === 0) {
+				$opts->setValue('days', $mage);
+			} else {
+				$opts->setValue('days', floatval($dys));
+			}
+		}
 		$opts->validateIntBounds( 'limit', 0, 5000 );
 		$opts->validateBounds( 'days', 0, $this->getConfig()->get( 'RCMaxAge' ) / ( 3600 * 24 ) );
 	}

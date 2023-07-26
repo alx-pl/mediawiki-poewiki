@@ -160,14 +160,13 @@ Controller.prototype.initialize = function ( filterStructure, namespaceStructure
 				validate: $.isNumeric,
 				range: {
 					min: 0, // The server normalizes negative numbers to 0 results
-					max: 1000
 				},
 				sortFunc: function ( a, b ) { return Number( a.name ) - Number( b.name ); },
 				default: mw.user.options.get( this.limitPreferenceName, displayConfig.limitDefault ),
 				sticky: true,
 				filters: displayConfig.limitArray.map( function ( num ) {
 					return controller._createFilterDataFromNumber( num, num );
-				} )
+				} ).concat([{name: "inf", label: "∞"}])
 			},
 			{
 				name: 'days',
@@ -178,7 +177,7 @@ Controller.prototype.initialize = function ( filterStructure, namespaceStructure
 				// FIXME: $.isNumeric is deprecated
 				validate: $.isNumeric,
 				range: {
-					min: 0,
+					min: -1,
 					max: displayConfig.maxDays
 				},
 				sortFunc: function ( a, b ) { return Number( a.name ) - Number( b.name ); },
@@ -199,8 +198,8 @@ Controller.prototype.initialize = function ( filterStructure, namespaceStructure
 							num,
 							// Convert fractions of days to number of hours for the labels
 							num < 1 ? Math.round( num * 24 ) : num
-						);
-					} )
+						)
+					} ).concat([{name: "-1", label: "∞"}]) // infinity
 			}
 		]
 	};
