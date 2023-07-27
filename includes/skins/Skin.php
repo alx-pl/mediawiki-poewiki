@@ -777,6 +777,8 @@ abstract class Skin extends ContextSource {
 	 * @return string
 	 */
 	public function subPageSubtitle( $out = null ) {
+		global $namespaceNames;
+
 		$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
 		$out = $out ?? $this->getOutput();
 		$title = $out->getTitle();
@@ -811,13 +813,21 @@ abstract class Skin extends ContextSource {
 
 						$c++;
 
-						if ( $c > 1 ) {
-							$subpages .= $lang->getDirMarkEntity() . $this->msg( 'pipe-separator' )->escaped();
+						if ($title->getNamespace() === NS_USER_TALK) {
+							if ($c <= 1) {
+								$ptxts = explode(":",$ptext,2);
+								$ln = Title::makeTitle(NS_USER , $ptxts[1]);
+								$glink = $linkRenderer->makeKnownLink($ln, wfMessage('userpagebacklink'));
+								$subpages .= $glink;
+							}
 						} else {
-							$subpages .= '&lt; ';
+							if ( $c > 1 ) {
+								$subpages .= $lang->getDirMarkEntity() . $this->msg( 'pipe-separator' )->escaped();
+							} else {
+								$subpages .= '&lt; ';
+							}
+							$subpages .= $getlink;
 						}
-
-						$subpages .= $getlink;
 						$display = '';
 					} else {
 						$display .= '/';
