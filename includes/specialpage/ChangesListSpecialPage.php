@@ -1382,7 +1382,7 @@ abstract class ChangesListSpecialPage extends SpecialPage {
 		}
 
 		$lim = $opts->getValue('limit');
-		if (gettype($lim) === string) {
+		if (is_string($lim)) {
 			$opts->add( 'limit', 0, $opts::INT);
 			if (strcmp($lim,"inf") === 0) {
 				$opts->setValue('limit', 4444);
@@ -1391,7 +1391,7 @@ abstract class ChangesListSpecialPage extends SpecialPage {
 			}
 		}
 		$dys = $opts->getValue('days');
-		if (gettype($dys) === string) {
+		if (is_string($dys)) {
 			$opts->add( 'days', 0, $opts::FLOAT);
 			if (strcmp($dys,"-1") === 0) {
 				$opts->setValue('days', $mage);
